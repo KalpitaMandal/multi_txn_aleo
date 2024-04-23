@@ -1,6 +1,7 @@
 # multi_txn_t1.aleo
 
 ## .env file 
+The private key can be obtained by using the `leo account` command.
 
 ```
 NETWORK=testnet3
