@@ -1,0 +1,48 @@
+⛓  Constraints
+
+ •  'helper.aleo/verify_balance' - 0 constraints (called 1 time)
+ •  'helper.aleo/transfer_relayer' - 3 constraints (called 1 time)
+ •  'multi_txn_t1.aleo/transfer_public' - 13,189 constraints (called 1 time)
+ •  'helper.aleo/mint_public' - 2,020 constraints (called 1 time)
+
+➡️  Outputs
+
+ • {
+  owner: aleo1rn636g94mx3qqhf7m79nsne3llv4dqs25707yhwcrk92p0kwrc9qe392wg.private,
+  amount: 3u64.private,
+  _nonce: 1792156992651587126790557250983267698708780981798738278083409600995883751829group.public
+}
+ • {
+  program_id: multi_txn_t1.aleo,
+  function_name: transfer_public,
+  arguments: [
+    {
+      program_id: helper.aleo,
+      function_name: mint_public,
+      arguments: [
+        aleo1806e60fnrwvtgl2y22qn3lzuaz84jdt0vwkd97edz9d7q4j6qu8qgnvxyj,
+        4u64
+      ]
+    },
+    {
+      program_id: helper.aleo,
+      function_name: verify_balance,
+      arguments: [
+        aleo1806e60fnrwvtgl2y22qn3lzuaz84jdt0vwkd97edz9d7q4j6qu8qgnvxyj,
+        4u64
+      ]
+    },
+    {
+      program_id: helper.aleo,
+      function_name: transfer_relayer,
+      arguments: [
+        aleo1806e60fnrwvtgl2y22qn3lzuaz84jdt0vwkd97edz9d7q4j6qu8qgnvxyj,
+        aleo1va0hzrcsj569gz0gd0mvue7xk54vku626nsmvl86s7j490x7yupq89l82z,
+        1u64
+      ]
+    },
+    aleo1806e60fnrwvtgl2y22qn3lzuaz84jdt0vwkd97edz9d7q4j6qu8qgnvxyj,
+    aleo1rn636g94mx3qqhf7m79nsne3llv4dqs25707yhwcrk92p0kwrc9qe392wg,
+    3u64
+  ]
+}

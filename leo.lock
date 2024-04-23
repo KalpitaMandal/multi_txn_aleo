@@ -1,0 +1,6 @@
+[[package]]
+name = "helper.aleo"
+location = "local"
+path = "/Users/kalpitamandal/marlin/aleo-avail-kalypso/multi_txn_t1/helper"
+checksum = "664cefbb9f93d683edfb6e8deb7e0b7ddde73049c32892926e3aa8548bcfd440"
+dependencies = []
