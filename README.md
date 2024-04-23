@@ -1,5 +1,12 @@
 # multi_txn_t1.aleo
 
+## .env file 
+
+```
+NETWORK=testnet3
+PRIVATE_KEY={PRIVATE_KEY}
+```
+
 ## Build Guide
 
 To compile this Aleo program, run:
