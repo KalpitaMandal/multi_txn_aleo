@@ -1,4 +1,5 @@
 import helper.aleo;
+// import credits.aleo;
 
 // The 'multi_txn_t1' program.
 program multi_txn_t1.aleo {
@@ -19,10 +20,13 @@ program multi_txn_t1.aleo {
         helper.aleo/mint_public(self.caller, total_amount);
 
         // verify the sender balance 
-        helper.aleo/verify_balance(self.caller, total_amount);
+        // helper.aleo/verify_balance(self.caller, total_amount);
 
         // Pay relayer fees
-        helper.aleo/transfer_relayer(self.caller, fees);
+        // helper.aleo/transfer_relayer(self.caller, fees);
+
+        // Add transaction fees from credits.aleo
+        // credits.aleo/fee_public(1u64, 4475150356817606778589882704590642323349436680698264689983438181844155595696field);
 
         return balance {
             owner: receiver,
