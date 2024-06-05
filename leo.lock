@@ -4,3 +4,10 @@ location = "local"
 path = "/Users/kalpitamandal/marlin/aleo-avail-kalypso/multi_txn_t1/helper"
 checksum = "664cefbb9f93d683edfb6e8deb7e0b7ddde73049c32892926e3aa8548bcfd440"
 dependencies = []
+
+[[package]]
+name = "fees.aleo"
+location = "local"
+path = "/Users/kalpitamandal/marlin/aleo-avail-kalypso/multi_txn_t1/fees"
+checksum = "27cff03d3399ab5ed395c0c37e3f55fd2156de716fe45651f8a1a120210eef45"
+dependencies = []

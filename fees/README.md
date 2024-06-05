@@ -1,4 +1,4 @@
-# credits.aleo
+# fees.aleo
 
 ## Build Guide
 
