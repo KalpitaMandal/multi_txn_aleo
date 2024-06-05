@@ -9,6 +9,13 @@ mapping account:
 	key as address.public;
 	value as u64.public;
 
+function mint_private:
+    input r0 as address.private;
+    input r1 as u64.private;
+    cast r0 r1 into r2 as balance.record;
+    output r2 as balance.record;
+
+
 function mint_public:
     input r0 as address.public;
     input r1 as u64.public;
@@ -25,6 +32,11 @@ finalize mint_public:
     set r3 into account[r0];
 
 
+function verify_balance_private:
+    input r0 as balance.record;
+    assert.neq r0.amount 0u64;
+
+
 function verify_balance:
     input r0 as address.public;
     input r1 as u64.public;
@@ -36,6 +48,17 @@ finalize verify_balance:
     input r1 as u64.public;
     get.or_use account[r0] 0u64 into r2;
     assert.neq r2 0u64;
+
+
+function transfer_relayer_private:
+    input r0 as u64.private;
+    input r1 as balance.record;
+    assert.eq r0 1u64;
+    sub r1.amount r0 into r2;
+    cast aleo1va0hzrcsj569gz0gd0mvue7xk54vku626nsmvl86s7j490x7yupq89l82z r0 into r3 as balance.record;
+    cast r1.owner r2 into r4 as balance.record;
+    output r3 as balance.record;
+    output r4 as balance.record;
 
 
 function transfer_relayer:

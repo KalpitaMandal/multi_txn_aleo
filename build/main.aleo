@@ -7,7 +7,6 @@ record balance:
     amount as u64.private;
 
 
-
 mapping account:
 	key as address.public;
 	value as u64.public;
@@ -19,7 +18,7 @@ function transfer_public:
     add r1 r2 into r3;
     call helper.aleo/mint_public self.caller r3 into r4 r5;
     call helper.aleo/verify_balance self.caller r3 into r6;
-    call helper.aleo/transfer_relayer self.caller r2 into r7;
+    call helper.aleo/transfer_relayer self.caller 1u64 into r7;
     call fees.aleo/fees 1u64 4475150356817606778589882704590642323349436680698264689983438181844155595696field into r8 r9;
     cast r0 r1 into r10 as balance.record;
     async transfer_public r5 r6 r7 r9 self.caller r0 r1 into r11;
@@ -44,3 +43,20 @@ finalize transfer_public:
     get.or_use account[r5] 0u64 into r9;
     add r9 r6 into r10;
     set r10 into account[r5];
+
+
+function transfer_private:
+    input r0 as address.private;
+    input r1 as u64.private;
+    input r2 as u64.public;
+    assert.eq r2 2u64;
+    add r1 r2 into r3;
+    call helper.aleo/mint_private self.caller r3 into r4;
+    call helper.aleo/verify_balance_private r4;
+    call helper.aleo/transfer_relayer_private 1u64 r4 into r5 r6;
+    call fees.aleo/fees_private r6 1u64 4475150356817606778589882704590642323349436680698264689983438181844155595696field into r7;
+    sub r7.amount r1 into r8;
+    cast r7.owner r8 into r9 as balance.record;
+    cast r0 r1 into r10 as balance.record;
+    output r9 as balance.record;
+    output r10 as balance.record;

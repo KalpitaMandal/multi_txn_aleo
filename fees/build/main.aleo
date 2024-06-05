@@ -1,8 +1,8 @@
 program fees.aleo;
 
-record credits:
+record balance:
     owner as address.private;
-    microcredits as u64.private;
+    amount as u64.private;
 
 
 mapping account:
@@ -14,9 +14,9 @@ function fees:
     input r1 as field.public;
     assert.neq r0 0u64;
     assert.neq r1 0field;
-    cast self.caller r0 into r2 as credits.record;
+    cast self.caller r0 into r2 as balance.record;
     async fees self.caller r0 into r3;
-    output r2 as credits.record;
+    output r2 as balance.record;
     output r3 as fees.aleo/fees.future;
 
 finalize fees:
@@ -25,3 +25,14 @@ finalize fees:
     get.or_use account[r0] 0u64 into r2;
     sub r2 r1 into r3;
     set r3 into account[r0];
+
+
+function fees_private:
+    input r0 as balance.record;
+    input r1 as u64.public;
+    input r2 as field.public;
+    assert.neq r1 0u64;
+    assert.neq r2 0field;
+    sub r0.amount r1 into r3;
+    cast r0.owner r3 into r4 as balance.record;
+    output r4 as balance.record;
