@@ -10,13 +10,9 @@ program fees.aleo {
         amount: u64,
     }
     
-    transition fees(public fee: u64, public chksm: field) -> balance {
+    transition fees(public fee: u64) {
         assert_neq(fee, 0u64);
-        assert_neq(chksm, 0field);
-        return balance {
-            owner: self.caller,
-            amount: fee
-        } then finalize(self.caller, fee);
+        return then finalize(self.caller, fee);
     }
 
     finalize fees (public caller: address, public fee: u64) {
@@ -24,9 +20,8 @@ program fees.aleo {
         Mapping::set(account, caller, caller_balance - fee);
     }
 
-    transition fees_private(sender_balance: balance, public fee: u64, public chksm: field) -> balance {
+    transition fees_private(sender_balance: balance, public fee: u64) -> balance {
         assert_neq(fee, 0u64);
-        assert_neq(chksm, 0field);
 
         let sender_out: balance = balance {
             owner: sender_balance.owner,

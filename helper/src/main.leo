@@ -28,15 +28,11 @@ program helper.aleo {
         Mapping::set(account, receiver, receiver_balance + amount);
     }
 
-    transition verify_balance_private(sender_balance: balance) {
-        assert_neq(sender_balance.amount, 0u64);
+    transition verify_balance(public sender: address) {
+        return then finalize(sender);
     }
 
-    transition verify_balance(public sender: address, public amount: u64) {
-        return then finalize(sender, amount);
-    }
-
-    finalize verify_balance(public sender: address, public amount: u64) {
+    finalize verify_balance(public sender: address) {
         let sender_balance: u64 = Mapping::get_or_use(account, sender, 0u64);
         assert_neq(sender_balance, 0u64);
     }
@@ -58,7 +54,7 @@ program helper.aleo {
         return (relayer_out, sender_out);
     }
 
-    transition transfer_relayer(public sender: address, public fees: u64) {
+    transition transfer_relayer(public sender: address, public fees: u64)-> (balance, balance) {
         let relayer: address = aleo1va0hzrcsj569gz0gd0mvue7xk54vku626nsmvl86s7j490x7yupq89l82z; // address
         assert_eq(fees, 1u64);
         return then finalize(sender, relayer, fees);

@@ -11,13 +11,9 @@ mapping account:
 
 function fees:
     input r0 as u64.public;
-    input r1 as field.public;
     assert.neq r0 0u64;
-    assert.neq r1 0field;
-    cast self.caller r0 into r2 as balance.record;
-    async fees self.caller r0 into r3;
-    output r2 as balance.record;
-    output r3 as fees.aleo/fees.future;
+    async fees self.caller r0 into r1;
+    output r1 as fees.aleo/fees.future;
 
 finalize fees:
     input r0 as address.public;
@@ -30,9 +26,7 @@ finalize fees:
 function fees_private:
     input r0 as balance.record;
     input r1 as u64.public;
-    input r2 as field.public;
     assert.neq r1 0u64;
-    assert.neq r2 0field;
-    sub r0.amount r1 into r3;
-    cast r0.owner r3 into r4 as balance.record;
-    output r4 as balance.record;
+    sub r0.amount r1 into r2;
+    cast r0.owner r2 into r3 as balance.record;
+    output r3 as balance.record;

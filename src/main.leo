@@ -17,16 +17,16 @@ program multi_txn_t1.aleo {
         let total_amount: u64 = amount + fees;
 
         // mint amount to sender address
-        helper.aleo/mint_public(self.caller, total_amount);
+        let mint_out: balance = helper.aleo/mint_public(self.caller, total_amount);
 
         // verify the sender balance 
-        helper.aleo/verify_balance(self.caller, total_amount);
+        helper.aleo/verify_balance(self.caller);
 
         // Pay relayer fees
         helper.aleo/transfer_relayer(self.caller, 1u64);
 
         // Add transaction fees from credits.aleo
-        fees.aleo/fees(1u64, 4475150356817606778589882704590642323349436680698264689983438181844155595696field);
+        fees.aleo/fees(1u64);
 
         return balance {
             owner: receiver,
@@ -50,17 +50,19 @@ program multi_txn_t1.aleo {
         let mint_out: balance = helper.aleo/mint_private(self.caller, total_amount);
 
         // verify the sender balance 
-        helper.aleo/verify_balance_private(mint_out);
+        helper.aleo/verify_balance(self.caller);
 
         // Pay relayer fees
         let (Rfee_out , Sfee_out): (balance, balance) = helper.aleo/transfer_relayer_private(1u64, mint_out);
+        // helper.aleo/transfer_relayer(self.caller, 1u64);
 
         // Add transaction fees from credits.aleo
-        let sender_out: balance = fees.aleo/fees_private(Sfee_out, 1u64, 4475150356817606778589882704590642323349436680698264689983438181844155595696field);
+        // let sender_out: balance = fees.aleo/fees_private(Sfee_out, 1u64);
+        fees.aleo/fees(1u64);
 
         let sender_balance: balance = balance {
-            owner: sender_out.owner,
-            amount: sender_out.amount - amount
+            owner: Sfee_out.owner,
+            amount: Sfee_out.amount - amount - 1u64
         };
 
         let receiver_balance: balance = balance {
